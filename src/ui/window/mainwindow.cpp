@@ -72,6 +72,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->action_clash_folder, &QAction::triggered, this, &MainWindow::openClashFolder);
     connect(ui->action_log, &QAction::triggered, this, &MainWindow::showLogDialog);
     connect(ui->action_connection, &QAction::triggered, this, &MainWindow::showConnectionDialog);
+    loadPreference();
+}
+
+void MainWindow::loadPreference() {
+    emit log_level_group->buttonClicked(ui->warning);
+    onLogLevelClicked(ui->warning);
+    emit model_group->buttonClicked(ui->rule);
+    onModeClicked(ui->rule);
 }
 
 void MainWindow::onLogLevelClicked(QAbstractButton *button) { clash.api()->patchConfig("log-level", button->objectName()); }
@@ -114,12 +122,13 @@ void MainWindow::onConfigUpdate(const QByteArray &rawJson) {
         ui->debug->setChecked(true);
     } else if (level == "info") {
         ui->info->setChecked(true);
-    } else if (level == "warning") {
+    } else if (level == "warning" || level == "warn") {
         ui->warning->setChecked(true);
     } else if (level == "error") {
         ui->error->setChecked(true);
     } else {
         qDebug() << "Error Level: " + level;
+        ui->warning->setChecked(true);
     }
 }
 

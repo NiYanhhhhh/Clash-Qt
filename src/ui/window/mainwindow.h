@@ -47,6 +47,7 @@ public slots:
 
 private:
     void updateGroup(const QJsonObject &proxies, QString group, QTreeWidgetItem *item);
+    void loadPreference();
 
     Ui::MainWindow *ui;
     Clash &clash;

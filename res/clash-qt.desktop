@@ -1,6 +1,6 @@
 [Desktop Entry]
-Icon=/usr/share/clash-qt/clash-qt.png
-Exec=clash-qt %u
+Icon=${CMAKE_INSTALL_PREFIX}/share/clash-qt/clash.png
+Exec=${CMAKE_INSTALL_PREFIX}/bin/clash-qt %u
 Version=2.0-alpha
 Type=Application
 Categories=Network

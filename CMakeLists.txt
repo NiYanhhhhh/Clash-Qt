@@ -35,8 +35,12 @@ target_link_libraries(clash-qt
         yaml-cpp
         )
 
+set(CMAKE_INSTALL_PREFIX /usr/local)
+configure_file(res/clash-qt.desktop clash-qt.desktop)
 install(TARGETS clash-qt DESTINATION bin)
-install(PROGRAMS res/bin/clash DESTINATION bin)
+if(NOT EXISTS "/usr/bin/clash")
+    install(PROGRAMS res/bin/clash DESTINATION bin)
+endif()
 install(FILES res/icon/clash.png DESTINATION share/clash-qt)
 install(DIRECTORY res/default/ DESTINATION share/clash-qt)
-install(FILES res/clash-qt.desktop DESTINATION share/applications)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/clash-qt.desktop" DESTINATION share/applications)

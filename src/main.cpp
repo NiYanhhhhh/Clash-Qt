@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     signal(SIGINT, signalhandler);
 
     a.setApplicationName("clash-qt");
-    a.setWindowIcon(QIcon(":/icon/clash.png"));
+    a.setWindowIcon(QIcon(":/icon/clash"));
     a.setQuitOnLastWindowClosed(false);
 
     getInstance<MainWindow>();
