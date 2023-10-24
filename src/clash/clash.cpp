@@ -1,4 +1,6 @@
 #include "clash.h"
+#include <qapplication.h>
+#include <qprocess.h>
 
 #include <QApplication>
 #include <QDir>
@@ -27,7 +29,7 @@ Clash::Clash(QString program, QString clash_dir, QObject *parent) : QObject(pare
         }
     }
 
-    connect(qApp, &QApplication::aboutToQuit, process, &QProcess::terminate);
+    connect(qApp, &QApplication::aboutToQuit, this, &Clash::stop);
 }
 void Clash::start() {
     qDebug() << "Starting Clash Process:" + clash_program;
@@ -44,11 +46,18 @@ void Clash::start() {
         qDebug() << process->processId();
     });
 }
-void Clash::stop() {}
+void Clash::stop() {
+    restfulApi->stopTimer();
+    process->terminate();
+    while (!process->waitForFinished(1000)) {
+        process->kill();
+    }
+    process->close();
+}
 void Clash::switchProfile(QString name) {}
 Clash::RestfulApi *Clash::api() { return restfulApi; }
+QProcess *Clash::getProcess() { return process; }
 bool Clash::checkFiles() {
-    QString clash_dir = this->clash_dir;
     if (clash_dir.isEmpty()) {
         clash_dir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.config/clash";
     }
@@ -112,6 +121,7 @@ Clash::RestfulApi::RestfulApi(QObject *parent) : QObject(parent) {
     connect(connectionTimer, &QTimer::timeout, this, &RestfulApi::updateConnection);
     configTimer = new QTimer;
     connect(configTimer, &QTimer::timeout, this, &RestfulApi::updateConfig);
+    // connect(qApp, &QApplication::aboutToQuit, this, &RestfulApi::stopTimer);
 }
 
 void Clash::RestfulApi::testConnection() {
@@ -277,6 +287,16 @@ void Clash::RestfulApi::autoUpdateProxy(bool enable, int interval_ms) { enableTi
 void Clash::RestfulApi::autoUpdateConnection(bool enable, int interval_ms) { enableTimer(connectionTimer, enable, interval_ms); }
 
 void Clash::RestfulApi::autoUpdateConfig(bool enable, int interval_ms) { enableTimer(configTimer, enable, interval_ms); }
+
+void Clash::RestfulApi::stopTimer() {
+    if (proxyTimer->isActive())
+        proxyTimer->stop();
+    if (connectionTimer->isActive())
+        connectionTimer->stop();
+    if (configTimer->isActive())
+        configTimer->stop();
+}
+
 void Clash::RestfulApi::updateProfile(const Profile &profile) {
     QString fullPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.config/clash/profile/" + profile.file;
     QFile file(fullPath);

@@ -1,9 +1,9 @@
+#include <QProcess>
 #include <QApplication>
 #include <csignal>
 
 #include "clash/clash.h"
 #include "ui/window/mainwindow.h"
-#include "ui/window/tray.h"
 #include "util/instance.h"
 
 void signalhandler(int sig) {
@@ -21,8 +21,7 @@ int main(int argc, char *argv[]) {
     a.setWindowIcon(QIcon(":/icon/clash"));
     a.setQuitOnLastWindowClosed(false);
 
-    getInstance<MainWindow>();
-    getInstance<Tray>().show();
+    MainWindow w;
     getInstance<Clash>().start();
 
     return a.exec();

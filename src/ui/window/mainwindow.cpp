@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 
+#include <qapplication.h>
 #include <yaml-cpp/yaml.h>
 
 #include <QButtonGroup>
@@ -20,6 +21,7 @@
 #include "ui/window/connectiondialog.h"
 #include "ui/window/logdialog.h"
 #include "ui/window/profiledialog.h"
+#include "ui/window/tray.h"
 #include "ui_mainwindow.h"
 #include "util/instance.h"
 #include "util/qtyaml.h"
@@ -45,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     log_level_group->addButton(ui->info);
     log_level_group->addButton(ui->warning);
     log_level_group->addButton(ui->error);
+    log_level_group->addButton(ui->silent);
     connect(log_level_group, QOverload<QAbstractButton *>::of(&QButtonGroup::buttonClicked), this, &MainWindow::onLogLevelClicked);
 
     model_group = new QButtonGroup(this);
@@ -72,16 +75,44 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->action_clash_folder, &QAction::triggered, this, &MainWindow::openClashFolder);
     connect(ui->action_log, &QAction::triggered, this, &MainWindow::showLogDialog);
     connect(ui->action_connection, &QAction::triggered, this, &MainWindow::showConnectionDialog);
-    loadPreference();
+    connect(ui->action_quit, &QAction::triggered, qApp, &QApplication::quit);
+
+    tray = new Tray(this);
+    connect(tray->quit, &QAction::triggered, this, [] { qApp->quit(); });
+    connect(tray->preference, &QAction::triggered, this, [this]{
+            show();
+            raise();
+            activateWindow();
+    });
+    connect(tray, &QSystemTrayIcon::activated, this, &MainWindow::onActivate);
+    tray->show();
 }
 
-void MainWindow::loadPreference() {
-    emit log_level_group->buttonClicked(ui->warning);
-    onLogLevelClicked(ui->warning);
-    emit model_group->buttonClicked(ui->rule);
-    onModeClicked(ui->rule);
+MainWindow::~MainWindow() {
+    qDebug() << "Destructing MainWindow";
+    delete ui;
 }
 
+void MainWindow::onActivate(QSystemTrayIcon::ActivationReason reason) {
+    switch (reason) {
+        case QSystemTrayIcon::Trigger:
+        case QSystemTrayIcon::DoubleClick:
+        {
+            if (!isActiveWindow()) {
+                if (isMinimized()) {
+                    showNormal();
+                }
+                show();
+                raise();
+                activateWindow();
+            } else {
+                close();
+            }
+            break;
+        }
+        default:;
+    }
+}
 void MainWindow::onLogLevelClicked(QAbstractButton *button) { clash.api()->patchConfig("log-level", button->objectName()); }
 void MainWindow::onModeClicked(QAbstractButton *button) { clash.api()->patchConfig("mode", button->objectName()); }
 
@@ -126,6 +157,8 @@ void MainWindow::onConfigUpdate(const QByteArray &rawJson) {
         ui->warning->setChecked(true);
     } else if (level == "error") {
         ui->error->setChecked(true);
+    } else if (level == "silent") {
+        ui->silent->setChecked(true);
     } else {
         qDebug() << "Error Level: " + level;
         ui->warning->setChecked(true);

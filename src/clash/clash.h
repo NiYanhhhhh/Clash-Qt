@@ -20,6 +20,8 @@ class QNetworkAccessManager;
 class QNetworkReply;
 
 class Clash : public QObject {
+Q_OBJECT
+
 public:
     struct Profile {
         QString name;
@@ -53,6 +55,18 @@ public:
                 qDebug() << "Failed to delete" << profile.file << "File not exist";
             }
         }
+        void update(int index, Profile profile_new) {
+            Profile &profile = list[index];
+            QFile file(QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.config/clash/profile/" + profile.file);
+            if (file.exists()) {
+                file.remove();
+            } else {
+                qDebug() << "Failed to delete" << profile.file << "File not exist";
+            }
+            profile.name = profile_new.name;
+            profile.file = profile_new.file;
+            profile.updatedTime = profile_new.updatedTime;
+        }
 
     private:
         QList<Clash::Profile> list;
@@ -64,10 +78,13 @@ public:
 public:
     explicit Clash(QString program = "", QString clash_dir = "", QObject *parent = nullptr);
     void start();
-    void stop();
     bool checkFiles();
     RestfulApi *api();
+    QProcess *getProcess();
     void switchProfile(QString name);
+
+public slots:
+    void stop();
 
 private:
     QProcess *process;
@@ -96,9 +113,9 @@ public:
     void autoUpdateProxy(bool enable = true, int interval_ms = 1000);
     void autoUpdateConnection(bool enable = true, int interval_ms = 1000);
     void autoUpdateConfig(bool enable = true, int interval_ms = 1000);
-
     void updateProfile(const Profile &profile);
     void patchConfig(QString key, QVariant value);
+    void stopTimer();
 
 signals:
     void connected();

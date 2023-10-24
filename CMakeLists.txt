@@ -35,7 +35,7 @@ target_link_libraries(clash-qt
         yaml-cpp
         )
 
-set(CMAKE_INSTALL_PREFIX /usr/local)
+    set(CMAKE_INSTALL_PREFIX $ENV{HOME}/.local)
 configure_file(res/clash-qt.desktop clash-qt.desktop)
 install(TARGETS clash-qt DESTINATION bin)
 if(NOT EXISTS "/usr/bin/clash")

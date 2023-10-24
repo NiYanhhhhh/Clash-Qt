@@ -98,6 +98,7 @@ ConnectionDialog::ConnectionDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     model = new ConnectionModel;
     ui->connectionTabel->setModel(model);
     ui->connectionTabel->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    // connect(ui->disconnectAll, &QPushButton::released, this.dis);
 
     timer = new QTimer(this);
     timer->start(1000);

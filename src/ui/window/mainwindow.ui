@@ -1,338 +1,360 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>MainWindow</class>
-    <widget class="QMainWindow" name="MainWindow">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>800</width>
-                <height>600</height>
-            </rect>
-        </property>
-        <property name="focusPolicy">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Clash-Qt</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../../res/res.qrc">
+    <normaloff>:/icon/clash.png</normaloff>:/icon/clash.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTreeWidget" name="proxies">
+      <column>
+       <property name="text">
+        <string>Proixes</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Config</string>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Allow Lan:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="allowLan">
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Mode:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QRadioButton" name="global">
+           <property name="focusPolicy">
             <enum>Qt::ClickFocus</enum>
-        </property>
-        <property name="windowTitle">
-            <string>Clash-Qt</string>
-        </property>
-        <property name="windowIcon">
-            <iconset resource="../../../res/res.qrc">
-                <normaloff>:/icon/clash.png</normaloff>:/icon/clash.png
-            </iconset>
-        </property>
-        <widget class="QWidget" name="centralwidget">
-            <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                    <widget class="QTreeWidget" name="proxies">
-                        <column>
-                            <property name="text">
-                                <string>Proixes</string>
-                            </property>
-                        </column>
-                    </widget>
-                </item>
-                <item>
-                    <widget class="QGroupBox" name="groupBox">
-                        <property name="title">
-                            <string>Config</string>
-                        </property>
-                        <layout class="QFormLayout" name="formLayout">
-                            <item row="6" column="0">
-                                <widget class="QLabel" name="label_5">
-                                    <property name="text">
-                                        <string>Allow Lan:</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="6" column="1">
-                                <widget class="QCheckBox" name="allowLan">
-                                    <property name="text">
-                                        <string>Enable</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="7" column="0">
-                                <widget class="QLabel" name="label_3">
-                                    <property name="text">
-                                        <string>Mode:</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="7" column="1">
-                                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                                    <item>
-                                        <widget class="QRadioButton" name="global">
-                                            <property name="focusPolicy">
-                                                <enum>Qt::ClickFocus</enum>
-                                            </property>
-                                            <property name="text">
-                                                <string>Global</string>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QRadioButton" name="rule">
-                                            <property name="text">
-                                                <string>Rule</string>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QRadioButton" name="direct">
-                                            <property name="text">
-                                                <string>Direct</string>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                </layout>
-                            </item>
-                            <item row="8" column="0">
-                                <widget class="QLabel" name="label_4">
-                                    <property name="text">
-                                        <string>Log Level:</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="8" column="1">
-                                <layout class="QHBoxLayout" name="horizontalLayout_3">
-                                    <item>
-                                        <widget class="QRadioButton" name="debug">
-                                            <property name="text">
-                                                <string>Debug</string>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QRadioButton" name="info">
-                                            <property name="text">
-                                                <string>Info</string>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QRadioButton" name="warning">
-                                            <property name="text">
-                                                <string>Warning</string>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QRadioButton" name="error">
-                                            <property name="text">
-                                                <string>Error</string>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                </layout>
-                            </item>
-                            <item row="9" column="1">
-                                <spacer name="verticalSpacer">
-                                    <property name="orientation">
-                                        <enum>Qt::Vertical</enum>
-                                    </property>
-                                    <property name="sizeHint" stdset="0">
-                                        <size>
-                                            <width>20</width>
-                                            <height>40</height>
-                                        </size>
-                                    </property>
-                                </spacer>
-                            </item>
-                            <item row="10" column="0">
-                                <widget class="QLabel" name="label_2">
-                                    <property name="text">
-                                        <string>Profile:</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="10" column="1">
-                                <layout class="QHBoxLayout" name="horizontalLayout_2">
-                                    <item>
-                                        <widget class="QComboBox" name="profile">
-                                            <property name="sizePolicy">
-                                                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                                                    <horstretch>0</horstretch>
-                                                    <verstretch>0</verstretch>
-                                                </sizepolicy>
-                                            </property>
-                                            <property name="focusPolicy">
-                                                <enum>Qt::ClickFocus</enum>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QPushButton" name="profileEdit">
-                                            <property name="text">
-                                                <string/>
-                                            </property>
-                                            <property name="icon">
-                                                <iconset theme="document-properties">
-                                                    <normaloff>.</normaloff>.
-                                                </iconset>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                </layout>
-                            </item>
-                            <item row="1" column="0">
-                                <widget class="QLabel" name="label">
-                                    <property name="text">
-                                        <string>Mixed Port:</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="3" column="0">
-                                <widget class="QLabel" name="label_7">
-                                    <property name="text">
-                                        <string>Http Port:</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="5" column="0">
-                                <widget class="QLabel" name="label_8">
-                                    <property name="text">
-                                        <string>Socks Port:</string>
-                                    </property>
-                                </widget>
-                            </item>
-                            <item row="1" column="1">
-                                <layout class="QHBoxLayout" name="horizontalLayout_5">
-                                    <item>
-                                        <widget class="QLineEdit" name="mixedPort">
-                                            <property name="focusPolicy">
-                                                <enum>Qt::ClickFocus</enum>
-                                            </property>
-                                            <property name="inputMethodHints">
-                                                <set>Qt::ImhDigitsOnly</set>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QPushButton" name="mixedPortSend">
-                                            <property name="text">
-                                                <string/>
-                                            </property>
-                                            <property name="icon">
-                                                <iconset theme="document-send">
-                                                    <normaloff>.</normaloff>.
-                                                </iconset>
-                                            </property>
-                                            <property name="flat">
-                                                <bool>false</bool>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                </layout>
-                            </item>
-                            <item row="3" column="1">
-                                <layout class="QHBoxLayout" name="horizontalLayout_6">
-                                    <item>
-                                        <widget class="QLineEdit" name="httpPort">
-                                            <property name="focusPolicy">
-                                                <enum>Qt::ClickFocus</enum>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QPushButton" name="httpPortSend">
-                                            <property name="text">
-                                                <string/>
-                                            </property>
-                                            <property name="icon">
-                                                <iconset theme="document-send">
-                                                    <normaloff>.</normaloff>.
-                                                </iconset>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                </layout>
-                            </item>
-                            <item row="5" column="1">
-                                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                                    <item>
-                                        <widget class="QLineEdit" name="socksPort">
-                                            <property name="focusPolicy">
-                                                <enum>Qt::ClickFocus</enum>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                    <item>
-                                        <widget class="QPushButton" name="socksPortSend">
-                                            <property name="text">
-                                                <string/>
-                                            </property>
-                                            <property name="icon">
-                                                <iconset theme="document-send">
-                                                    <normaloff>.</normaloff>.
-                                                </iconset>
-                                            </property>
-                                        </widget>
-                                    </item>
-                                </layout>
-                            </item>
-                        </layout>
-                    </widget>
-                </item>
-                <item>
-                    <layout class="QVBoxLayout" name="verticalLayout"/>
-                </item>
-            </layout>
+           </property>
+           <property name="text">
+            <string>Global</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="rule">
+           <property name="text">
+            <string>Rule</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="direct">
+           <property name="text">
+            <string>Direct</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Log Level:</string>
+         </property>
         </widget>
-        <widget class="QStatusBar" name="statusbar"/>
-        <widget class="QToolBar" name="toolBar">
-            <property name="windowTitle">
-                <string>toolBar</string>
-            </property>
-            <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextBesideIcon</enum>
-            </property>
-            <attribute name="toolBarArea">
-                <enum>TopToolBarArea</enum>
-            </attribute>
-            <attribute name="toolBarBreak">
-                <bool>false</bool>
-            </attribute>
-            <addaction name="action_clash_folder"/>
-            <addaction name="action_log"/>
-            <addaction name="action_connection"/>
+       </item>
+       <item row="8" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QRadioButton" name="info">
+           <property name="text">
+            <string>Info</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="warning">
+           <property name="text">
+            <string>Warning</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="error">
+           <property name="text">
+            <string>Error</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="9" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_3_">
+         <item>
+          <widget class="QRadioButton" name="debug">
+           <property name="text">
+            <string>Debug</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="silent">
+           <property name="text">
+            <string>Silent</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="10" column="1">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Profile:</string>
+         </property>
         </widget>
-        <action name="action_clash_folder">
-            <property name="icon">
-                <iconset theme="go-home"/>
-            </property>
-            <property name="text">
-                <string>Clash Folder</string>
-            </property>
-            <property name="toolTip">
-                <string>Open Clash Folder</string>
-            </property>
-        </action>
-        <action name="action_log">
-            <property name="icon">
-                <iconset theme="application-menu"/>
-            </property>
-            <property name="text">
-                <string>Log</string>
-            </property>
-            <property name="toolTip">
-                <string>Show Clash Log</string>
-            </property>
-        </action>
-        <action name="action_connection">
-            <property name="icon">
-                <iconset theme="network-connect"/>
-            </property>
-            <property name="text">
-                <string>Connection</string>
-            </property>
-            <property name="toolTip">
-                <string>Show Clash Connection List</string>
-            </property>
-        </action>
-    </widget>
-    <resources>
-        <include location="../../../res/res.qrc"/>
-    </resources>
-    <connections/>
+       </item>
+       <item row="11" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QComboBox" name="profile">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::ClickFocus</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="profileEdit">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="document-properties">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Mixed Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Http Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Socks Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLineEdit" name="mixedPort">
+           <property name="focusPolicy">
+            <enum>Qt::ClickFocus</enum>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhDigitsOnly</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="mixedPortSend">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="document-send">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLineEdit" name="httpPort">
+           <property name="focusPolicy">
+            <enum>Qt::ClickFocus</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="httpPortSend">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="document-send">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="5" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLineEdit" name="socksPort">
+           <property name="focusPolicy">
+            <enum>Qt::ClickFocus</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="socksPortSend">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="document-send">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_clash_folder"/>
+   <addaction name="action_log"/>
+   <addaction name="action_connection"/>
+   <addaction name="action_quit"/>
+  </widget>
+  <action name="action_clash_folder">
+   <property name="icon">
+    <iconset theme="go-home">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Clash Folder</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Clash Folder</string>
+   </property>
+  </action>
+  <action name="action_log">
+   <property name="icon">
+    <iconset theme="application-menu">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Log</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Clash Log</string>
+   </property>
+  </action>
+  <action name="action_connection">
+   <property name="icon">
+    <iconset theme="network-connect">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Connection</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Clash Connection List</string>
+   </property>
+  </action>
+  <action name="action_quit">
+   <property name="icon">
+    <iconset theme="application-exit">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>Quit Clash Qt</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../../../res/res.qrc"/>
+ </resources>
+ <connections/>
 </ui>

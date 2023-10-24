@@ -5,6 +5,7 @@
 #include <QMap>
 
 #include "clash/clash.h"
+#include "ui/window/tray.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +21,7 @@ class MainWindow : public QMainWindow {
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-
+    ~MainWindow();
 
     void loadProfiles();
     void saveProfiles();
@@ -36,6 +37,7 @@ public slots:
     void showProfileDialog();
     void showLogDialog();
     void showConnectionDialog();
+    void onActivate(QSystemTrayIcon::ActivationReason reason);
 
     void onLogLevelClicked(QAbstractButton *button);
     void onModeClicked(QAbstractButton *button);
@@ -47,7 +49,6 @@ public slots:
 
 private:
     void updateGroup(const QJsonObject &proxies, QString group, QTreeWidgetItem *item);
-    void loadPreference();
 
     Ui::MainWindow *ui;
     Clash &clash;
@@ -60,6 +61,8 @@ private:
 
     Clash::ProfileList profile_list;
     NetSpeedLabel *net_speed_label;
+    Tray *tray;
+    // static MainWindow *this_instance;
 };
 
 #endif  // MAINWINDOW_H
