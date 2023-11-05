@@ -10,9 +10,9 @@ Clash简易客户端，提供启动clash， 管理订阅的功能
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
-sudo make install
+make install
 ```
-It will install into /opt/clash-qt
+It will install into $HOME/.local/share/clash-qt by default
 
 ## Requirement
 
